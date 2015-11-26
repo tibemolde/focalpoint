@@ -1,6 +1,6 @@
 {% set image = craft.assets.id(asset_id).kind('image') %}
 {% if not image|length %}
-	<em>Ikke gyldig bilde</em>
+	<em>{{ 'Invalid image'|t }} </em>
 {% else %}
 	{% set image = image[0] %}	
 	{% set thumb = {
