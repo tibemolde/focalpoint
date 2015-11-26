@@ -100,7 +100,8 @@ class Focalpoint_FocalpointService extends BaseApplicationComponent {
 
 		$updateTime = filemtime($imagePath);
 		$imgHash = md5($imagePath . $x . $y . $cropW . $cropH . $outW . $outH . $updateTime);
-		$outputDir = $this->publicDir . $this->getOutputDir();
+		$cropOutputDir = $this->getOutputDir();
+		$outputDir = $this->publicDir . $cropOutputDir;
 
 		if (!file_exists($outputDir)) {
 			mkdir($outputDir);
@@ -141,13 +142,13 @@ class Focalpoint_FocalpointService extends BaseApplicationComponent {
 		if (!file_exists($path)) {
 			return false;
 		}
-		return $this->outputDir . '/' . $fileName;
+		return $cropOutputDir . '/' . $fileName;
 	}
 
 	public function getOutputDir() {
 		$plugin = craft()->plugins->getPlugin('focalpoint');
 		$settings = $plugin->getSettings();
-		return $settings->outputDir;
+		return $settings->storageFolder;
 	}
 
 	public function getJpgQuality() {

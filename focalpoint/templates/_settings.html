@@ -1,11 +1,11 @@
 {% import "_includes/forms" as forms %}
 {{ forms.textField({
         label: "JPG quality"|t,
-        id: 'jqpQuality',
-        name: 'jqpQuality',
+        id: 'jpgQuality',
+        name: 'jpgQuality',
         instructions: "JPG quality for cropped images"|t,
-        value: settings.jqpQuality,
-        errors: settings.getErrors('jqpQuality')
+        value: settings.jpgQuality,
+        errors: settings.getErrors('jpgQuality')
     })
 }}
 {{ forms.textField({
