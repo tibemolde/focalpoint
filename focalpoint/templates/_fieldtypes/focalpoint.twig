@@ -1,0 +1,31 @@
+{% set image = craft.assets.id(asset_id).kind('image') %}
+{% if not image|length %}
+	<em>Ikke gyldig bilde</em>
+{% else %}
+	{% set image = image[0] %}	
+	{% set thumb = {
+		width: 250
+	} %}
+	{% set thumbWidth = image.getWidth(thumb) %}
+	{% set thumbHeight = image.getHeight(thumb) %}
+	{% set fullWidth = image.getWidth() %}
+	{% set scale = thumbWidth / fullWidth %}
+	<div class="focal-editor" id="{{ id }}">
+		<input type="hidden" name="{{ name }}[x]" id="focal_x_val" value="{{ (x_val ? x_val*scale : thumbWidth / 2)|round }}">
+		<input type="hidden" name="{{ name }}[y]" id="focal_y_val" value="{{ (y_val ? y_val*scale : thumbHeight / 2)|round }}">
+		<input type="hidden" name="{{ name }}[scale]" value="{{ scale }}">
+		<div id="focus_picker" class="focus_picker">
+			<img src="{{ image.getUrl(thumb) }}" width="{{ thumbWidth }}" height="{{ thumbHeight }}" id="focus_img" class="focus_img">
+			<span id="focus_pick" class="focus_pick"></span>
+		</div>
+	</div>
+	{% set js %}
+	jQuery(function($) {
+		var prefix = '{{ id | namespaceInputName }}';
+		prefix = prefix.substring(0, prefix.indexOf('[')) + '-fields-';
+		var picker = new ImgFocusPicker(prefix);
+	});
+	{% endset %}
+
+	{% includeJs js %}
+{% endif %}

@@ -1,0 +1,24 @@
+/* Image focus picker */
+.focus_picker {
+	position: relative;
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;	
+   overflow: hidden;
+}
+.focus_picker span {
+	position: absolute;
+	height: 14px;
+	width: 14px;
+	background: rgba(255,255,255,0.5);
+	border: 2px solid rgba(218,90,71,0.7);
+	display: block;
+	border-radius: 15px;
+	cursor: pointer;
+	display: none;
+}
+.focus_picker img {
+	display: block;
+}

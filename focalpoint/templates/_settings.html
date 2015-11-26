@@ -1,0 +1,19 @@
+{% import "_includes/forms" as forms %}
+{{ forms.textField({
+        label: "JPG quality"|t,
+        id: 'jqpQuality',
+        name: 'jqpQuality',
+        instructions: "JPG quality for cropped images"|t,
+        value: settings.jqpQuality,
+        errors: settings.getErrors('jqpQuality')
+    })
+}}
+{{ forms.textField({
+        label: "Storage folder"|t,
+        id: 'storageFolder',
+        name: 'storageFolder',
+        instructions: "Storage folder for cropped images - path relative to public folder"|t,
+        value: settings.storageFolder,
+        errors: settings.getErrors('storageFolder')
+    })
+}}
