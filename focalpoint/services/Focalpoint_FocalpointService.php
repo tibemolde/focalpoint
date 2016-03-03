@@ -145,6 +145,20 @@ class Focalpoint_FocalpointService extends BaseApplicationComponent {
 		return $cropOutputDir . '/' . $fileName;
 	}
 
+	/** Get list of cropped images */
+	public function getImageList($img, $formats) {
+		$list = array();
+		if (is_array($formats)) {
+			foreach ($formats as $format) {
+				$cropped = $this->getCroppedImage($img, $format[0], $format[1]);
+				if ($cropped) {
+					$list[] = $cropped;
+				}
+			}
+		}
+		return $list;
+	}
+
 	public function getOutputDir() {
 		$plugin = craft()->plugins->getPlugin('focalpoint');
 		$settings = $plugin->getSettings();
