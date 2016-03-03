@@ -19,8 +19,16 @@ class Focalpoint_FocalpointService extends BaseApplicationComponent {
 
 	// crop image relative to selected focus point
 	public function getCroppedImage($image, $w, $h, $x=false, $y=false) {
-		$imageUrl = $image->url;
-		$imagePath = $this->publicDir . $imageUrl;
+		$source = $image->getSource();
+		if ($source->type != 'Local') {
+			// ignore crop for remote sources at the moment
+			return $image->url;
+		}
+
+		$sourcePath = $source->settings['path'];
+		$folderPath = $image->getFolder()->path;
+
+		$imagePath = $sourcePath . $folderPath . $image->filename;
 
 		if (!file_exists($imagePath)) {
 			return false;
@@ -29,7 +37,7 @@ class Focalpoint_FocalpointService extends BaseApplicationComponent {
 		list($imgW, $imgH) = getimagesize($imagePath);
 
 		if ($w == $imgW && $h == $imgH) {
-			return $imageUrl;
+			return $image->url;
 		}
 
 		$x = false;
