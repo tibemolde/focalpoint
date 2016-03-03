@@ -21,5 +21,5 @@ To get the url to the cropped image, use the craft.focalpoint.getImgCrop method:
 
 	{% set image = craft.assets().limit(1).first() %}
 	{% set croppedImage = craft.focalpoint.getImgCrop(image, 720, 360) %}
-	<img src="{{ transformedImage.url }}">
+	<img src="{{ croppedImage.url }}">
 
